@@ -37,8 +37,9 @@ public class UserInput extends Storage {
             System.out.println("Enter Hydro after");
             b = takeNum();
             addToRS(a, b, user);
-            System.out.flush();
-            System.out.println("What next?");
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();  
+            System.out.println("\nWhat next?");
             break;
         case "BLS":
             System.out.println("Enter Hydro before");
@@ -46,7 +47,8 @@ public class UserInput extends Storage {
             System.out.println("Enter Hydro after");
             b = takeNum();
             addToBLS(a, b, user);
-            System.out.flush();
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();  
             System.out.println("\nWhat next?");
             break;
         case "SHIP":
@@ -55,12 +57,14 @@ public class UserInput extends Storage {
             System.out.println("Enter Hydro after");
             b = takeNum();
             addToShipments(a, b, user);
-            System.out.flush();
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();  
             System.out.println("\nWhat next?");
             break;
         case "VIEW":
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();  
             System.out.println(viewStats());
-            System.out.flush();
             System.out.println("\nWhat next?");
             break;
         case "MENU":
@@ -70,6 +74,9 @@ public class UserInput extends Storage {
             pickUsr();
             showMenu();
             break;
+        default:
+            System.out.println("Incorrect selection, to get back to the main menu type "
+                             + "\"Menu\", otherwise type the command you wish to use");
         }
     }
 }
