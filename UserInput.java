@@ -1,26 +1,29 @@
 package hadesHydroMgr;
 
-import java.util.Scanner;
-
 public class UserInput extends Storage {
 
     public void mainMenu() {
-        String input = "";
+        boolean end = false;
+        pickUsr();
+        showMenu();
         do {
-            showMenu();
-            input = takeString();
+            String input = takeString();
             input = input.toUpperCase();
             switchMenu(input);
-        } while(input.contains("CLS")==false);
+            if(input.contains("CLS")==true) end = true;
+        } while(end == false);
     }
 
     private void showMenu() {
-        System.out.println("-----------------------\n"
+        System.out.println("Hello " + user + "!\n\n"
+                + "-----------------------\n"
                 + "   Red Star - RS\n"
                 + "  Blue Star - BLS\n"
                 + "  Shipments - Ship\n"
                 + " View Stats - View\n"
-                + "      Close - Cls\n"
+                + "  Main Menu - Menu\n"
+                + "    Log Out - Out\n"
+                + "      Close - Cls\n"            
                 + "-----------------------");
     }
 
@@ -33,40 +36,40 @@ public class UserInput extends Storage {
             a = takeNum();
             System.out.println("Enter Hydro after");
             b = takeNum();
-            addToRS(a, b);
+            addToRS(a, b, user);
+            System.out.flush();
+            System.out.println("What next?");
             break;
         case "BLS":
             System.out.println("Enter Hydro before");
             a = takeNum();
             System.out.println("Enter Hydro after");
             b = takeNum();
-            addToBLS(a, b);
+            addToBLS(a, b, user);
+            System.out.flush();
+            System.out.println("\nWhat next?");
             break;
         case "SHIP":
             System.out.println("Enter Hydro before");
             a = takeNum();
             System.out.println("Enter Hydro after");
             b = takeNum();
-            addToShipments(a, b);
+            addToShipments(a, b, user);
+            System.out.flush();
+            System.out.println("\nWhat next?");
             break;
         case "VIEW":
             System.out.println(viewStats());
+            System.out.flush();
+            System.out.println("\nWhat next?");
+            break;
+        case "MENU":
+            showMenu();
+            break;
+        case "OUT":
+            pickUsr();
+            showMenu();
             break;
         }
-    }
-    private String takeString() {
-        // takes and returns string input
-        @SuppressWarnings("resource")
-        Scanner in = new Scanner(System.in);
-        in.useDelimiter("\\s");
-        String input = in.next();
-        return input;   
-    }
-    private int takeNum() {
-        // takes and returns int input
-        @SuppressWarnings("resource")
-        Scanner in = new Scanner(System.in);
-        int input = in.nextInt();
-        return input;   
     }
 }
